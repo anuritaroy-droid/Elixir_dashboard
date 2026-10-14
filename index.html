@@ -44,7 +44,7 @@ main{max-width:1500px;margin:0 auto;padding:1.6rem 2rem 3rem}
 .error-banner.visible{display:block}
 
 /* ---- KPI cards ---- */
-.cards{display:grid;grid-template-columns:repeat(6,1fr);gap:1rem}
+/* .cards{display:grid;grid-template-columns:repeat(6,1fr);gap:1rem} */
 .card{position:relative;background:var(--surface);border-radius:16px;padding:1.1rem 1.2rem;box-shadow:var(--shadow);border:1px solid var(--line);overflow:hidden}
 .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--accent)}
 .card.day-start::before{background:#e0a800}
@@ -329,7 +329,7 @@ table.interval-table thead th:first-child {
           <div class="value" id="kpi-within">—</div>
           <div class="sub" id="kpi-within-sub">11 a.m. – 4 p.m.</div>
         </div>
-        <div class="card c-rose">
+        <!-- <div class="card c-rose">
           <div class="card-head"><span class="ico"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg></span><span class="label">Post TAT</span></div>
           <div class="value" id="kpi-post">—</div>
           <div class="sub" id="kpi-post-sub">11 a.m. – 4 p.m.</div>
@@ -338,7 +338,7 @@ table.interval-table thead th:first-child {
           <div class="card-head"><span class="ico"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 5 5 19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg></span><span class="label">Within %</span></div>
           <div class="value" id="kpi-within-pct">—</div>
           <div class="sub" id="kpi-within-pct-sub">of 4 p.m. Till</div>
-        </div>
+        </div> -->
         <div class="card c-blue">
           <div class="card-head"><span class="ico"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15v3M12 10v8M17 6v12"/></svg></span><span class="label">EOD volume</span></div>
           <div class="value" id="kpi-eod">—</div>
@@ -991,15 +991,15 @@ function updateCards() {
   };
 
   if (!m) {
-    ["kpi-day", "kpi-till", "kpi-within", "kpi-post", "kpi-within-pct", "kpi-eod"].forEach((id) => set(id, "—"));
+    ["kpi-day", "kpi-till", "kpi-within", "kpi-eod"].forEach((id) => set(id, "—"));
     return;
   }
 
   set("kpi-day", m[IDX_DAY_TICKETS], "8 p.m. – 8 a.m. window");
   set("kpi-till", m[IDX_4PM_TILL], "4 p.m. Till Hrs (11 a.m. – 4 p.m.)");
   set("kpi-within", m[IDX_4PM_WITHIN], "Within TAT (11 a.m. – 4 p.m.)");
-  set("kpi-post", m[IDX_4PM_POST], "Post TAT (11 a.m. – 4 p.m.)");
-  set("kpi-within-pct", pct(m[IDX_4PM_WITHIN], m[IDX_4PM_TILL]), "Within ÷ 4 p.m. Till Hrs (11 a.m. – 4 p.m.)");
+  // set("kpi-post", m[IDX_4PM_POST], "Post TAT (11 a.m. – 4 p.m.)");
+  // set("kpi-within-pct", pct(m[IDX_4PM_WITHIN], m[IDX_4PM_TILL]), "Within ÷ 4 p.m. Till Hrs (11 a.m. – 4 p.m.)");
   set("kpi-eod", m[IDX_EOD_TILL], "EOD Till Hrs (4 p.m. – 8 p.m.)");
 }
 
@@ -1525,8 +1525,8 @@ const EMBED_GRID = [["","","","","","","","",""],["RM","AM","Hub Name","Incident
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(EMBED_GRID), "TID Summary");
   const buf = XLSX.write(wb, { type: "array", bookType: "xlsx" });
-  const rs = document.getElementById("refresh-stamp"); if (rs) rs.innerHTML = "Data source: Google Sheet<br><b>Refreshed 14 Oct 2026, 12:00</b>";
-  handleFile({ name: "Google Sheet: TID Summary (refreshed 14 Oct 2026, 12:00)", arrayBuffer: async () => buf });
+  const rs = document.getElementById("refresh-stamp"); if (rs) rs.innerHTML = "Data source: Google Sheet<br><b>Refreshed 14 Oct 2026, 12:27</b>";
+  handleFile({ name: "Google Sheet: TID Summary (refreshed 14 Oct 2026, 12:27)", arrayBuffer: async () => buf });
 })();
 </script>
 </body>
