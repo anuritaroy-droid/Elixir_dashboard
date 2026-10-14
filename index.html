@@ -44,7 +44,7 @@ main{max-width:1500px;margin:0 auto;padding:1.6rem 2rem 3rem}
 .error-banner.visible{display:block}
 
 /* ---- KPI cards ---- */
-/* .cards{display:grid;grid-template-columns:repeat(6,1fr);gap:1rem} */
+.cards{display:grid;grid-template-columns:repeat(6,1fr);gap:1rem}
 .card{position:relative;background:var(--surface);border-radius:16px;padding:1.1rem 1.2rem;box-shadow:var(--shadow);border:1px solid var(--line);overflow:hidden}
 .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--accent)}
 .card.day-start::before{background:#e0a800}
@@ -80,8 +80,8 @@ main{max-width:1500px;margin:0 auto;padding:1.6rem 2rem 3rem}
 .filters-grid>div{background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.2rem 1.4rem;box-shadow:var(--shadow);font-size:.88rem}
 .filters-grid strong:first-child{color:var(--navy);font-size:.95rem}
 code{background:#eef2f9;padding:.1rem .4rem;border-radius:6px;font-size:.82em}
-@media(max-width:1100px){.cards{grid-template-columns:repeat(3,1fr)}.charts{grid-template-columns:1fr}.chart-box.wide{grid-column:auto}}
-@media(max-width:640px){.cards{grid-template-columns:repeat(2,1fr)}main{padding:1rem}.topbar-row,.filter-bar{padding-left:1rem;padding-right:1rem}}
+@media(max-width:1100px){.cards{grid-template-columns:repeat(4,1fr)}.charts{grid-template-columns:1fr}.chart-box.wide{grid-column:auto}}
+@media(max-width:640px){.cards{grid-template-columns:repeat(4,1fr)}main{padding:1rem}.topbar-row,.filter-bar{padding-left:1rem;padding-right:1rem}}
 
 /* ===== Glassmorphism theme (overrides) ===== */
 body{background:#e9eefb;min-height:100vh;position:relative}
@@ -1525,8 +1525,8 @@ const EMBED_GRID = [["","","","","","","","",""],["RM","AM","Hub Name","Incident
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(EMBED_GRID), "TID Summary");
   const buf = XLSX.write(wb, { type: "array", bookType: "xlsx" });
-  const rs = document.getElementById("refresh-stamp"); if (rs) rs.innerHTML = "Data source: Google Sheet<br><b>Refreshed 14 Oct 2026, 12:27</b>";
-  handleFile({ name: "Google Sheet: TID Summary (refreshed 14 Oct 2026, 12:27)", arrayBuffer: async () => buf });
+  const rs = document.getElementById("refresh-stamp"); if (rs) rs.innerHTML = "Data source: Google Sheet<br><b>Refreshed 14 Oct 2026, 12:32</b>";
+  handleFile({ name: "Google Sheet: TID Summary (refreshed 14 Oct 2026, 12:32)", arrayBuffer: async () => buf });
 })();
 </script>
 </body>
