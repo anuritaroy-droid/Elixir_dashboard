@@ -463,11 +463,11 @@ const IDX_EOD_TILL = metricIndex("EOD", "Till Hrs");
 
 const WITHIN_VAL = "Responded within TAT";
 const COL_WITHIN = "Response within 4hrs";
-const TICKET_STATUS_COL = "TicketStatus";
+const TICKET_STATUS_COL = "Ticket Status";
 const TICKET_ID_ALIASES = ["Tracking ID", "Incident ID"];
 
 /** Match wsoc_interval_report.py: row 1 is title, row 2 is headers (0-based index 1). */
-const TID_HEADER_ROW = 1;
+const TID_HEADER_ROW = 0;
 
 function parseIcdt(str) {
   if (!str) return null;
@@ -567,17 +567,17 @@ function colAny(headers, names) {
   return -1;
 }
 
-function ticketStatusNorm(v) {
+function Ticket StatusNorm(v) {
   return String(v || "").trim().toLowerCase();
 }
 
 function isCloseStatus(v) {
-  const s = ticketStatusNorm(v);
+  const s = Ticket StatusNorm(v);
   return s === "close" || s === "closed";
 }
 
 function isOpenStatus(v) {
-  const s = ticketStatusNorm(v);
+  const s = Ticket StatusNorm(v);
   return s === "open" || s === "opened";
 }
 
@@ -598,7 +598,7 @@ function countDayStartTickets(incidents, bounds) {
   for (const r of incidents) {
     const inNight = r.icdt >= bounds.prev8 && r.icdt < bounds.day8;
     const inOpen =
-      r.icdt >= openStart && r.icdt <= openEnd && isOpenStatus(r.ticketStatus);
+      r.icdt >= openStart && r.icdt <= openEnd && isOpenStatus(r.Ticket Status);
     if (!inNight && !inOpen) continue;
     keys.add(r.ticketId || `${r.icdt.getTime()}\0${r.rm}\0${r.hub}`);
   }
@@ -608,7 +608,7 @@ function countDayStartTickets(incidents, bounds) {
 function countD1CloseIcdt(incidents, start, end, { startInclusive = true, endInclusive = true } = {}) {
   let n = 0;
   for (const r of incidents) {
-    if (!isCloseStatus(r.ticketStatus)) continue;
+    if (!isCloseStatus(r.Ticket Status)) continue;
     if (startInclusive ? r.icdt < start : r.icdt <= start) continue;
     if (endInclusive ? r.icdt > end : r.icdt >= end) continue;
     n++;
@@ -731,7 +731,7 @@ function loadTidIncidents(wb) {
       icdt,
       icdDate: icdRaw || icdt,
       within4: iWithin >= 0 ? String(line[iWithin] || "").trim() : "",
-      ticketStatus: iStatus >= 0 ? String(line[iStatus] || "").trim() : "",
+      Ticket Status: iStatus >= 0 ? String(line[iStatus] || "").trim() : "",
       ticketId: iTid >= 0 ? String(line[iTid] || "").trim() : "",
     });
   }
@@ -751,7 +751,7 @@ function reviveIncidents(list) {
       icdt,
       icdDate: cellToDate(r.icdDate) || icdt,
       within4: String(r.within4 || "").trim(),
-      ticketStatus: String(r.ticketStatus || "").trim(),
+      Ticket Status: String(r.Ticket Status || "").trim(),
       ticketId: String(r.ticketId || "").trim(),
     });
   }
@@ -1525,8 +1525,8 @@ const EMBED_GRID = [["","","","","","","","",""],["RM","AM","Hub Name","Incident
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(EMBED_GRID), "TID Summary");
   const buf = XLSX.write(wb, { type: "array", bookType: "xlsx" });
-  const rs = document.getElementById("refresh-stamp"); if (rs) rs.innerHTML = "Data source: Google Sheet<br><b>Refreshed 26 Oct 2026, 13:33</b>";
-  handleFile({ name: "Google Sheet: TID Summary (refreshed 26 Oct 2026, 13:33)", arrayBuffer: async () => buf });
+  const rs = document.getElementById("refresh-stamp"); if (rs) rs.innerHTML = "Data source: Google Sheet<br><b>Refreshed 26 Oct 2026, 13:37</b>";
+  handleFile({ name: "Google Sheet: TID Summary (refreshed 26 Oct 2026, 13:37)", arrayBuffer: async () => buf });
 })();
 </script>
 </body>
