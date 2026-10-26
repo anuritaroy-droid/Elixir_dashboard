@@ -702,7 +702,7 @@ function uniqueOrdered(list, key) {
 }
 
 function loadTidIncidents(wb) {
-  const sheet = wb.Sheets["TID Summary"];
+  const sheet = wb.Sheets["TID"];
   if (!sheet) return null;
   const grid = XLSX.utils.sheet_to_json(sheet, { header: 1, defval: null, raw: false });
   if (grid.length < TID_HEADER_ROW + 2) return null;
@@ -1020,7 +1020,7 @@ function updateGist() {
   }
   const live =
     state.parsed?.source === "tid"
-      ? " Computed from TID Summary (same rules as wsoc_interval_report.py)."
+      ? " Computed from TID (same rules as wsoc_interval_report.py)."
       : state.parsed?.source === "interval"
         ? " From Interval_Summary sheet (generated Excel output)."
         : "";
@@ -1330,7 +1330,7 @@ function refreshView() {
   if (badge) {
     const src = state.parsed?.source;
     badge.textContent =
-      src === "interval" ? "Interval_Summary (output)" : src === "tid" ? "TID Summary (input)" : "—";
+      src === "interval" ? "Interval_Summary (output)" : src === "tid" ? "TID (input)" : "—";
   }
   scheduleLiveRefresh();
 }
@@ -1406,11 +1406,11 @@ async function handleFile(file) {
       showError(e.message || String(e));
       return;
     }
-  } else if (wb.Sheets["TID Summary"]) {
-    showError(`TID Summary must include column "${TICKET_STATUS_COL}" (exact spelling).`);
+  } else if (wb.Sheets["TID"]) {
+    showError(`TID must include column "${TICKET_STATUS_COL}" (exact spelling).`);
     return;
   } else {
-    showError('Upload the input workbook with sheet "TID Summary".');
+    showError('Upload the input workbook with sheet "TID".');
     return;
   }
 
@@ -1495,7 +1495,7 @@ function init() {
       recomputeParsed();
       refreshView();
     } else {
-      showError("Upload a workbook with TID Summary to recompute for a new report date.");
+      showError("Upload a workbook with TID to recompute for a new report date.");
       updateWindowHint();
     }
   });
@@ -1526,8 +1526,8 @@ const EMBED_GRID = [["","","","","","","","",""],["RM","AM","Hub Name","Incident
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(EMBED_GRID), "TID Summary");
   const buf = XLSX.write(wb, { type: "array", bookType: "xlsx" });
-  const rs = document.getElementById("refresh-stamp"); if (rs) rs.innerHTML = "Data source: Google Sheet<br><b>Refreshed 26 Oct 2026, 15:19</b>";
-  handleFile({ name: "Google Sheet: TID Summary (refreshed 26 Oct 2026, 15:19)", arrayBuffer: async () => buf });
+  const rs = document.getElementById("refresh-stamp"); if (rs) rs.innerHTML = "Data source: Google Sheet<br><b>Refreshed 26 Oct 2026, 15:22</b>";
+  handleFile({ name: "Google Sheet: TID Summary (refreshed 26 Oct 2026, 15:22)", arrayBuffer: async () => buf });
 })();
 </script>
 </body>
