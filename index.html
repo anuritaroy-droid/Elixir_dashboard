@@ -1525,8 +1525,8 @@ const EMBED_GRID = [["","","","","","","","",""],["RM","AM","Hub Name","Incident
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(EMBED_GRID), "TID Summary");
   const buf = XLSX.write(wb, { type: "array", bookType: "xlsx" });
-  const rs = document.getElementById("refresh-stamp"); if (rs) rs.innerHTML = "Data source: Google Sheet<br><b>Refreshed 28 Oct 2026, 08:00</b>";
-  handleFile({ name: "Google Sheet: TID Summary (refreshed 28 Oct 2026, 08:00)", arrayBuffer: async () => buf });
+  const rs = document.getElementById("refresh-stamp"); if (rs) rs.innerHTML = "Data source: Google Sheet<br><b>Refreshed 28 Oct 2026, 09:00</b>";
+  handleFile({ name: "Google Sheet: TID Summary (refreshed 28 Oct 2026, 09:00)", arrayBuffer: async () => buf });
 })();
 </script>
 </body>
